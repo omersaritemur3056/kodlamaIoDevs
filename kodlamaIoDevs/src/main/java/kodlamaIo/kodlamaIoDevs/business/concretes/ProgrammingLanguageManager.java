@@ -32,6 +32,9 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 			if (inDbLanguage.getName().equals(programmingLanguage.getName())) {
 				throw new Exception("Bu isimli programlama dili zaten mevcut!");
 			}
+			if (inDbLanguage.getId() == programmingLanguage.getId()) {
+				throw new Exception("İd tekrar edemez!");
+			}
 		}
 		
 		programmingLanguageRepository.save(programmingLanguage);
