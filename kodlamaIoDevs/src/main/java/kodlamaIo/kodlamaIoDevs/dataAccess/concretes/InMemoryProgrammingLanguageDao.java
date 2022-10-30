@@ -14,7 +14,7 @@ import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
 public class InMemoryProgrammingLanguageDao implements ProgrammingLanguageRepository {
 
 	List<ProgrammingLanguage> programmingLanguages;
-	Collection<ProgrammingLanguage> programmingLanguages2 = new ArrayList<ProgrammingLanguage>();
+	//Collection<ProgrammingLanguage> programmingLanguages2 = new ArrayList<ProgrammingLanguage>();
 
 	public InMemoryProgrammingLanguageDao() {
 		programmingLanguages = new ArrayList<ProgrammingLanguage>();

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingLanguageService;
 import kodlamaIo.kodlamaIoDevs.dataAccess.abstracts.ProgrammingLanguageRepository;
+import kodlamaIo.kodlamaIoDevs.dataAccess.concretes.InMemoryProgrammingLanguageDao;
 import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
 
 @Service
@@ -16,7 +17,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 
 	@Autowired
 	public ProgrammingLanguageManager(ProgrammingLanguageRepository programmingLanguageRepository) {
-		super();
+		//super();
 		this.programmingLanguageRepository = programmingLanguageRepository;
 	}
 	
@@ -44,7 +45,7 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	public void delete(int id) throws Exception {
 		
 		for (ProgrammingLanguage inDbLanguage : programmingLanguageRepository.getList()) {
-			if (inDbLanguage.getId() != id) {
+			if (inDbLanguage.getId() != id - 1) {
 				throw new Exception("Bu id ile ilgili bir obje bulunamadı!");
 			}
 			
