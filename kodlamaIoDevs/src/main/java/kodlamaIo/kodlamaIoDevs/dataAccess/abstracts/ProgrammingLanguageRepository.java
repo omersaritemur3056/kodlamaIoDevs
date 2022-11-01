@@ -7,7 +7,7 @@ import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
 public interface ProgrammingLanguageRepository {
 
 	void save(ProgrammingLanguage programmingLanguage);
-	void delete(ProgrammingLanguage programmingLanguage);
+	void delete(int id);
 	void modify(ProgrammingLanguage programmingLanguage) throws Exception;
 	
 	List<ProgrammingLanguage> getList();

@@ -30,9 +30,9 @@ public class InMemoryProgrammingLanguageDao implements ProgrammingLanguageReposi
 	}
 
 	@Override
-	public void delete(ProgrammingLanguage programmingLanguage) {
+	public void delete(int id) {
 		
-		programmingLanguages.remove(programmingLanguage);
+		programmingLanguages.removeIf(PL -> PL.getId() == id);
 	}
 
 	@Override
