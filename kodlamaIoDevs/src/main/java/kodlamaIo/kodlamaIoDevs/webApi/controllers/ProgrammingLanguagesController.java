@@ -15,12 +15,14 @@ import org.springframework.web.client.HttpClientErrorException.BadRequest;
 
 import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingLanguageService;
 import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/programminglanguages")
 public class ProgrammingLanguagesController {
 
-	private ProgrammingLanguageService programmingLanguageService;
+	
+	private final ProgrammingLanguageService programmingLanguageService;
 
 	@Autowired
 	public ProgrammingLanguagesController(ProgrammingLanguageService programmingLanguageService) {
@@ -34,15 +36,15 @@ public class ProgrammingLanguagesController {
 		programmingLanguageService.add(programmingLanguage);
 	}
 	
-	@DeleteMapping("/delete")
-	public void delete(@RequestParam int id) throws Exception {
-		programmingLanguageService.delete(id);
-	}
+//	@DeleteMapping("/delete")
+//	public void delete(@RequestParam int id) throws Exception {
+//		programmingLanguageService.delete(id);
+//	}
 	
-	@PutMapping("/update")
-	public void update(@RequestBody ProgrammingLanguage programmingLanguage) throws Exception {
-		programmingLanguageService.update(programmingLanguage);
-	}
+//	@PutMapping("/update")
+//	public void update(@RequestBody ProgrammingLanguage programmingLanguage) throws Exception {
+//		programmingLanguageService.update(programmingLanguage);
+//	}
 	
 	@GetMapping("/getall")
 	public List<ProgrammingLanguage> getAll(){
