@@ -31,7 +31,7 @@ public class ProgrammingLanguage {
 	@Column(name = "programming_language_name")
 	private String name;
 	
-//	@OneToMany(mappedBy = "programmingLanguage") //camelCase
-//	List<ProgrammingTechnology> programmingTechnologies;
+	@OneToMany(mappedBy = "programmingLanguage") //camelCase
+	List<ProgrammingTechnology> programmingTechnologies;
 	
 }

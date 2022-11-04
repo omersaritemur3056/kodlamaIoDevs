@@ -1,5 +1,6 @@
 package kodlamaIo.kodlamaIoDevs.business.concretes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +8,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingLanguageService;
+import kodlamaIo.kodlamaIoDevs.business.requests.programmingLanguageRequest.CreateProgrammingLanguage;
+import kodlamaIo.kodlamaIoDevs.business.requests.programmingLanguageRequest.DeleteProgrammingLanguage;
+import kodlamaIo.kodlamaIoDevs.business.requests.programmingLanguageRequest.UpdateProgrammingLanguage;
+import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetListProgrammingLanguage;
+import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetProgrammingLanguageById;
 import kodlamaIo.kodlamaIoDevs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
 
 @Service
 public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	
-	
 	private ProgrammingLanguageRepository programmingLanguageRepository;
-	//final değişkenini araştır.
 	
 	public ProgrammingLanguageManager(ProgrammingLanguageRepository programmingLanguageRepository) {
 		//super();
@@ -24,60 +28,108 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	
 
 	@Override
-	public void add(ProgrammingLanguage programmingLanguage) throws Exception {
+	public void add(CreateProgrammingLanguage createProgrammingLanguage) throws Exception {
 		
-		if (programmingLanguage.getName().isBlank()) {
-			throw new Exception("Programlama dili boş geçilemez!");
+		if (createProgrammingLanguage.getName().isBlank() || isNameExist(createProgrammingLanguage.getName())) {
+			throw new Exception("Ekleme koşulları sağlanamadı! Kuralları inceleyiniz.");
 		}
 		
-		for (ProgrammingLanguage inDbLanguage : programmingLanguageRepository.findAll()) {
-			if (inDbLanguage.getName().equals(programmingLanguage.getName())) {
-				throw new Exception("Bu isimli programlama dili zaten mevcut!");
-			}
-			if (inDbLanguage.getId() == programmingLanguage.getId()) {
-				throw new Exception("İd tekrar edemez!");
-			}
-		}
+		ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+		programmingLanguage.setName(createProgrammingLanguage.getName());
 		
 		programmingLanguageRepository.save(programmingLanguage);
 	}
 
-//	@Override
-//	public void delete(int id) throws Exception {
-//		
-//		for (ProgrammingLanguage programmingLanguage : programmingLanguageRepository.findAll()) {
-//			if (programmingLanguage.getId() == id ) {
-//				programmingLanguageRepository.delete(id);
-//			}
-//		}
-//	}
-
-//	@Override
-//	public void update(ProgrammingLanguage programmingLanguage) throws Exception {
-//		
-//		if (programmingLanguage.getName().isBlank()) {
-//			throw new Exception("Programlama dili boş geçilemez!");
-//		}
-//		
-//		for (ProgrammingLanguage inDbLanguage : programmingLanguageRepository.findAll()) {
-//			if (inDbLanguage.getName().equals(programmingLanguage.getName())) {
-//				throw new Exception("Bu isimli programlama dili zaten mevcut!");
-//			}
-//		}
-//		
-//		programmingLanguageRepository.(programmingLanguage);
-//	}
-
 	@Override
-	public List<ProgrammingLanguage> getAll() {
+	public void delete(DeleteProgrammingLanguage deleteProgrammingLanguage) throws Exception {
 		
-		return programmingLanguageRepository.findAll();
+		if (!isIdExist(deleteProgrammingLanguage.getId())) {
+			throw new Exception("Silinecek objenin id'si bulunamadı!");
+		}
+		
+		ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+		programmingLanguage.setId(deleteProgrammingLanguage.getId());
+		
+		programmingLanguageRepository.delete(programmingLanguage);
 	}
 
 	@Override
-	public ProgrammingLanguage getProgrammingLanguageById(int id) {
+	public void update(UpdateProgrammingLanguage updateProgrammingLanguage) throws Exception {
 		
-		return programmingLanguageRepository.getById(id);
+		if (isNameExist(updateProgrammingLanguage.getName()) || isIdNotExist(updateProgrammingLanguage.getId())) {
+			throw new Exception("Güncelleme koşulları sağlanamadı! Koşulları inceleyiniz.");
+		}
+		
+		ProgrammingLanguage programmingLanguage = new ProgrammingLanguage();
+		programmingLanguage.setId(updateProgrammingLanguage.getId());
+		programmingLanguage.setName(updateProgrammingLanguage.getName());
+		
+		programmingLanguageRepository.save(programmingLanguage);
+	}
+
+	@Override
+	public List<GetListProgrammingLanguage> getAll() {
+		
+		List<ProgrammingLanguage> programmingLanguages = programmingLanguageRepository.findAll();
+		List<GetListProgrammingLanguage> getListProgrammingLanguagesResponse = new ArrayList<>();
+		
+		for (ProgrammingLanguage programmingLanguage : programmingLanguages) {
+			GetListProgrammingLanguage programmingLanguageResponseItem = new GetListProgrammingLanguage();
+			programmingLanguageResponseItem.setId(programmingLanguage.getId());
+			programmingLanguageResponseItem.setName(programmingLanguage.getName());
+			
+			getListProgrammingLanguagesResponse.add(programmingLanguageResponseItem);
+		}
+		
+		return getListProgrammingLanguagesResponse;
+	}
+
+	@Override
+	public GetProgrammingLanguageById getProgrammingLanguageById(int id) throws Exception {
+		
+		if (!isIdExist(id)) {
+			throw new Exception("Id bulunamadı!");
+		}
+		
+		ProgrammingLanguage result = programmingLanguageRepository.findById(id);
+		GetProgrammingLanguageById getProgrammingLanguageById = new GetProgrammingLanguageById();
+		
+		getProgrammingLanguageById.setId(result.getId());
+		getProgrammingLanguageById.setName(result.getName());
+		getProgrammingLanguageById.setProgrammingTechnologies(result.getProgrammingTechnologies());
+		
+		return getProgrammingLanguageById;
 	}
 	
+	
+
+	private boolean isNameExist(String name) {
+		for (ProgrammingLanguage pl : programmingLanguageRepository.findAll()) {
+			if (pl.getName().equals(name)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean isIdExist(int id) {
+		for (ProgrammingLanguage pl : programmingLanguageRepository.findAll()) {
+			if (pl.getId() == id) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean isIdNotExist(int id) {
+		for (ProgrammingLanguage pl : programmingLanguageRepository.findAll()) {
+			if (pl.getId() == id) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }

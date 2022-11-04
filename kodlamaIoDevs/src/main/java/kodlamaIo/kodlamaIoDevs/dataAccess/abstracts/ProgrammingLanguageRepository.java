@@ -8,5 +8,9 @@ import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
 
 public interface ProgrammingLanguageRepository extends JpaRepository<ProgrammingLanguage, Integer> {
 
+	List<ProgrammingLanguage> findAllById(int id);
+	List<ProgrammingLanguage> findAllByName(String name);
 	
+	ProgrammingLanguage findById(int id);
+	ProgrammingLanguage findByName(String name);
 }
