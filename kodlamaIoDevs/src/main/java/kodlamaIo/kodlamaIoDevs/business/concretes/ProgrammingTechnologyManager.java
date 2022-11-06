@@ -6,13 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingLanguageService;
 import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingTechnologyService;
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingTechnologyRequest.CreateProgrammingTechnology;
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingTechnologyRequest.DeleteProgrammingTechnology;
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingTechnologyRequest.UpdateProgrammingTechnology;
-import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetListProgrammingLanguage;
-import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetProgrammingLanguageById;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingTechnologyResponse.GetListProgrammingTechnology;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingTechnologyResponse.GetProgrammingTechnologyById;
 import kodlamaIo.kodlamaIoDevs.dataAccess.abstracts.ProgrammingLanguageRepository;
@@ -83,7 +80,7 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 		
 		for (ProgrammingTechnology programmingTechnology : programmingTechnologies) {
 			GetListProgrammingTechnology programmingTechnologyResponseItem = new GetListProgrammingTechnology();
-			ProgrammingLanguage language = new ProgrammingLanguage();
+			
 			programmingTechnologyResponseItem.setId(programmingTechnology.getId());
 			programmingTechnologyResponseItem.setName(programmingTechnology.getName());
 			programmingTechnologyResponseItem.setProgrammingLanguageId(programmingTechnology.getId());

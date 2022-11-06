@@ -3,8 +3,6 @@ package kodlamaIo.kodlamaIoDevs.business.concretes;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingLanguageService;
@@ -15,7 +13,6 @@ import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.Ge
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetProgrammingLanguageById;
 import kodlamaIo.kodlamaIoDevs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
-import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingTechnology;
 
 @Service
 public class ProgrammingLanguageManager implements ProgrammingLanguageService {

@@ -1,14 +1,5 @@
 package kodlamaIo.kodlamaIoDevs.dataAccess.concretes;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Repository;
-
-import kodlamaIo.kodlamaIoDevs.dataAccess.abstracts.ProgrammingLanguageRepository;
-import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
-
 //@Repository("primary")
 ////@Primary
 //public class InMemoryProgrammingLanguageDao2 implements ProgrammingLanguageRepository {

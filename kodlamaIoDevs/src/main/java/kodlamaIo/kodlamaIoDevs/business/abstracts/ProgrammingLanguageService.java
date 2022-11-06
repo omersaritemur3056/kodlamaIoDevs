@@ -7,7 +7,6 @@ import kodlamaIo.kodlamaIoDevs.business.requests.programmingLanguageRequest.Dele
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingLanguageRequest.UpdateProgrammingLanguage;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetListProgrammingLanguage;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetProgrammingLanguageById;
-import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
 
 public interface ProgrammingLanguageService {
 

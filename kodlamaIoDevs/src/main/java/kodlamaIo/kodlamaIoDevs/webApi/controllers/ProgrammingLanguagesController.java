@@ -2,7 +2,6 @@ package kodlamaIo.kodlamaIoDevs.webApi.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.HttpClientErrorException.BadRequest;
 
 import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingLanguageService;
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingLanguageRequest.CreateProgrammingLanguage;
@@ -19,8 +17,6 @@ import kodlamaIo.kodlamaIoDevs.business.requests.programmingLanguageRequest.Dele
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingLanguageRequest.UpdateProgrammingLanguage;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetListProgrammingLanguage;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetProgrammingLanguageById;
-import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/programminglanguages")

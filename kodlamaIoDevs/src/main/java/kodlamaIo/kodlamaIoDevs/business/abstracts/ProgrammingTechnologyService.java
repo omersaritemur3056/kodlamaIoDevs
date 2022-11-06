@@ -7,8 +7,6 @@ import kodlamaIo.kodlamaIoDevs.business.requests.programmingTechnologyRequest.De
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingTechnologyRequest.UpdateProgrammingTechnology;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingTechnologyResponse.GetListProgrammingTechnology;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingTechnologyResponse.GetProgrammingTechnologyById;
-import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
-import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingTechnology;
 
 public interface ProgrammingTechnologyService {
 
