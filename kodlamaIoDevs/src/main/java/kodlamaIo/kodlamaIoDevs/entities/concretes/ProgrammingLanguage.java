@@ -2,13 +2,17 @@ package kodlamaIo.kodlamaIoDevs.entities.concretes;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +35,8 @@ public class ProgrammingLanguage {
 	@Column(name = "programming_language_name")
 	private String name;
 	
-	@OneToMany(mappedBy = "programmingLanguage") //camelCase
+	
+	@OneToMany(mappedBy = "programmingLanguage", fetch = FetchType.LAZY, cascade = CascadeType.ALL) //camelCase
 	List<ProgrammingTechnology> programmingTechnologies;
 	
 }

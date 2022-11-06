@@ -49,7 +49,7 @@ public class ProgrammingTechnologiesController {
 	}
 	
 	@GetMapping("getbyid")
-	public GetProgrammingTechnologyById getById(int id) throws Exception {
+	public GetProgrammingTechnologyById getById(@RequestParam int id) throws Exception {
 		return programmingTechnologyService.getProgrammingTechnologyId(id);
 	}
 }

@@ -15,6 +15,7 @@ import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.Ge
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetProgrammingLanguageById;
 import kodlamaIo.kodlamaIoDevs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
+import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingTechnology;
 
 @Service
 public class ProgrammingLanguageManager implements ProgrammingLanguageService {
@@ -96,7 +97,6 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 		
 		getProgrammingLanguageById.setId(result.getId());
 		getProgrammingLanguageById.setName(result.getName());
-		getProgrammingLanguageById.setProgrammingTechnologies(result.getProgrammingTechnologies());
 		
 		return getProgrammingLanguageById;
 	}
@@ -126,10 +126,10 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 	private boolean isIdNotExist(int id) {
 		for (ProgrammingLanguage pl : programmingLanguageRepository.findAll()) {
 			if (pl.getId() == id) {
-				return true;
+				return false;
 			}
 		}
 		
-		return false;
+		return true;
 	}
 }

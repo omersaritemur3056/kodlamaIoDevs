@@ -14,6 +14,4 @@ public class GetProgrammingLanguageById {
 
 	private int id;
 	private String name;
-	
-	private List<ProgrammingTechnology> programmingTechnologies;
 }

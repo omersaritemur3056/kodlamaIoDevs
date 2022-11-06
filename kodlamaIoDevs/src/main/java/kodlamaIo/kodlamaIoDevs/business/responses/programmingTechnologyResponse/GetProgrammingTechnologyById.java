@@ -13,6 +13,6 @@ public class GetProgrammingTechnologyById {
 
 	private int id;
 	private String name;
-	
-	ProgrammingLanguage programmingLanguage;
+	private int programmingLanguageId;
+	private String programmingLanguageName;
 }

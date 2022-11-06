@@ -14,7 +14,6 @@ public class GetListProgrammingTechnology {
 
 	private int id;
 	private String name;
+	private int programmingLanguageId;
 	private String programmingLanguageName;
-	
-	//ProgrammingLanguage programmingLanguage;
 }

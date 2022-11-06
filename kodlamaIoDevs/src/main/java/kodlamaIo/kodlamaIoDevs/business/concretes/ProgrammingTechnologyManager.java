@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingLanguageService;
 import kodlamaIo.kodlamaIoDevs.business.abstracts.ProgrammingTechnologyService;
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingTechnologyRequest.CreateProgrammingTechnology;
 import kodlamaIo.kodlamaIoDevs.business.requests.programmingTechnologyRequest.DeleteProgrammingTechnology;
@@ -14,6 +15,7 @@ import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.Ge
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingLanguageResponse.GetProgrammingLanguageById;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingTechnologyResponse.GetListProgrammingTechnology;
 import kodlamaIo.kodlamaIoDevs.business.responses.programmingTechnologyResponse.GetProgrammingTechnologyById;
+import kodlamaIo.kodlamaIoDevs.dataAccess.abstracts.ProgrammingLanguageRepository;
 import kodlamaIo.kodlamaIoDevs.dataAccess.abstracts.ProgrammingTechnologyRepository;
 import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingLanguage;
 import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingTechnology;
@@ -23,6 +25,8 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 
 	@Autowired
 	private ProgrammingTechnologyRepository programmingTechnologyRepository;
+	@Autowired
+	private ProgrammingLanguageRepository programmingLanguageRepository;
 	
 
 	@Override
@@ -33,7 +37,10 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 		}
 		
 		ProgrammingTechnology programmingTechnology = new ProgrammingTechnology();
+		ProgrammingLanguage language = programmingLanguageRepository.findById(createProgrammingTechnology.getProgrammingLanguageId());
 		programmingTechnology.setName(createProgrammingTechnology.getName());
+		programmingTechnology.setProgrammingLanguage(language);
+		
 		
 		programmingTechnologyRepository.save(programmingTechnology);
 	}
@@ -54,13 +61,15 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 	@Override
 	public void update(UpdateProgrammingTechnology updateProgrammingTechnology) throws Exception {
 		
-		if (isNameExist(updateProgrammingTechnology.getName()) || !isIdExist(updateProgrammingTechnology.getId())) {
+		if (isNameExist(updateProgrammingTechnology.getName()) || isIdNotExist(updateProgrammingTechnology.getId())) {
 			throw new Exception("Güncelleme koşulları sağlanamadı! Koşulları inceleyiniz.");
 		}
 		
 		ProgrammingTechnology programmingTechnology = new ProgrammingTechnology();
+		ProgrammingLanguage programmingLanguage = programmingLanguageRepository.findById(updateProgrammingTechnology.getProgrammingLanguageId());
 		programmingTechnology.setId(updateProgrammingTechnology.getId());
 		programmingTechnology.setName(updateProgrammingTechnology.getName());
+		programmingTechnology.setProgrammingLanguage(programmingLanguage);
 		
 		programmingTechnologyRepository.save(programmingTechnology);
 	}
@@ -71,10 +80,14 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 		List<ProgrammingTechnology> programmingTechnologies = programmingTechnologyRepository.findAll();
 		List<GetListProgrammingTechnology> getListProgrammingTechnologiesResponse = new ArrayList<>();
 		
+		
 		for (ProgrammingTechnology programmingTechnology : programmingTechnologies) {
 			GetListProgrammingTechnology programmingTechnologyResponseItem = new GetListProgrammingTechnology();
+			ProgrammingLanguage language = new ProgrammingLanguage();
 			programmingTechnologyResponseItem.setId(programmingTechnology.getId());
 			programmingTechnologyResponseItem.setName(programmingTechnology.getName());
+			programmingTechnologyResponseItem.setProgrammingLanguageId(programmingTechnology.getId());
+			programmingTechnologyResponseItem.setProgrammingLanguageName(programmingTechnology.getName());
 			
 			getListProgrammingTechnologiesResponse.add(programmingTechnologyResponseItem);
 		}
@@ -90,11 +103,12 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 		}
 		
 		ProgrammingTechnology result = programmingTechnologyRepository.findById(id);
-		GetProgrammingTechnologyById getProgrammingTechnologyeById = new GetProgrammingTechnologyById();
+		GetProgrammingTechnologyById getProgrammingTechnologyeById = new GetProgrammingTechnologyById();		
 		
 		getProgrammingTechnologyeById.setId(result.getId());
 		getProgrammingTechnologyeById.setName(result.getName());
-		getProgrammingTechnologyeById.setProgrammingLanguage(result.getProgrammingLanguage());
+		getProgrammingTechnologyeById.setProgrammingLanguageId(result.getProgrammingLanguage().getId());
+		getProgrammingTechnologyeById.setProgrammingLanguageName(result.getProgrammingLanguage().getName());
 		
 		return getProgrammingTechnologyeById;
 	}
@@ -119,5 +133,15 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 		}
 		
 		return false;
+	}
+	
+	private boolean isIdNotExist(int id) {
+		for (ProgrammingTechnology pt : programmingTechnologyRepository.findAll()) {
+			if (pt.getId() == id) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 }

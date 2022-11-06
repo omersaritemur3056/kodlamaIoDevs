@@ -28,8 +28,7 @@ public class ProgrammingLanguagesController {
 
 	
 	private final ProgrammingLanguageService programmingLanguageService;
-
-	@Autowired
+	
 	public ProgrammingLanguagesController(ProgrammingLanguageService programmingLanguageService) {
 		super();
 		this.programmingLanguageService = programmingLanguageService;
@@ -57,7 +56,7 @@ public class ProgrammingLanguagesController {
 	}
 	
 	@GetMapping("getbyid")
-	public GetProgrammingLanguageById getById(int id) throws Exception {
+	public GetProgrammingLanguageById getById(@RequestParam int id) throws Exception {
 		return programmingLanguageService.getProgrammingLanguageById(id);
 	}
 	
