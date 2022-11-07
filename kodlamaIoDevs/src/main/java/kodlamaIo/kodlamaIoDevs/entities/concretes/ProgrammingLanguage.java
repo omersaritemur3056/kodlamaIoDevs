@@ -36,6 +36,6 @@ public class ProgrammingLanguage {
 	
 	
 	@OneToMany(mappedBy = "programmingLanguage", fetch = FetchType.LAZY, cascade = CascadeType.ALL) //camelCase
-	List<ProgrammingTechnology> programmingTechnologies;
+	private List<ProgrammingTechnology> programmingTechnologies;
 	
 }

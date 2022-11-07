@@ -77,14 +77,14 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 		List<ProgrammingTechnology> programmingTechnologies = programmingTechnologyRepository.findAll();
 		List<GetListProgrammingTechnology> getListProgrammingTechnologiesResponse = new ArrayList<>();
 		
-		
 		for (ProgrammingTechnology programmingTechnology : programmingTechnologies) {
 			GetListProgrammingTechnology programmingTechnologyResponseItem = new GetListProgrammingTechnology();
+			//var result = programmingTechnologyRepository.findById(programmingTechnology.getId());
 			
 			programmingTechnologyResponseItem.setId(programmingTechnology.getId());
 			programmingTechnologyResponseItem.setName(programmingTechnology.getName());
-			programmingTechnologyResponseItem.setProgrammingLanguageId(programmingTechnology.getId());
-			programmingTechnologyResponseItem.setProgrammingLanguageName(programmingTechnology.getName());
+			//programmingTechnologyResponseItem.setProgrammingLanguageId(result.getId());
+			//programmingTechnologyResponseItem.setProgrammingLanguageName(result.getName());
 			
 			getListProgrammingTechnologiesResponse.add(programmingTechnologyResponseItem);
 		}
