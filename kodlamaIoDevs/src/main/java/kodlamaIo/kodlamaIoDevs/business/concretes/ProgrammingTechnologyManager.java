@@ -76,15 +76,16 @@ public class ProgrammingTechnologyManager implements ProgrammingTechnologyServic
 		
 		List<ProgrammingTechnology> programmingTechnologies = programmingTechnologyRepository.findAll();
 		List<GetListProgrammingTechnology> getListProgrammingTechnologiesResponse = new ArrayList<>();
-		var result = programmingTechnologies.stream().findAny().get();
+		//var result = programmingLanguageRepository.findAll();
 		
-		for (ProgrammingTechnology programmingTechnology : programmingTechnologies) {
+		for (ProgrammingTechnology pt : programmingTechnologies) {
 			GetListProgrammingTechnology programmingTechnologyResponseItem = new GetListProgrammingTechnology();
 			
-			programmingTechnologyResponseItem.setId(programmingTechnology.getId());
-			programmingTechnologyResponseItem.setName(programmingTechnology.getName());
-			programmingTechnologyResponseItem.setProgrammingLanguageId(result.getProgrammingLanguage().getId());
-			programmingTechnologyResponseItem.setProgrammingLanguageName(result.getProgrammingLanguage().getName());
+			programmingTechnologyResponseItem.setId(pt.getId());
+			programmingTechnologyResponseItem.setName(pt.getName());
+			//olurda technology objelerinden bazılarının language id'si null gelirse bu alttaki iki kod satırı NullPointerException hatası fırlatır. O yüzden null olan veri varsa SQL'den silebiliriz
+			programmingTechnologyResponseItem.setProgrammingLanguageId(pt.getProgrammingLanguage().getId());
+			programmingTechnologyResponseItem.setProgrammingLanguageName(pt.getProgrammingLanguage().getName());
 			
 			getListProgrammingTechnologiesResponse.add(programmingTechnologyResponseItem);
 		}
