@@ -9,6 +9,8 @@ import kodlamaIo.kodlamaIoDevs.entities.concretes.ProgrammingTechnology;
 
 public interface ProgrammingTechnologyRepository extends JpaRepository<ProgrammingTechnology, Integer> {
 
+	//Jpa'nın sağladığı hazır sorgular(query) find, findAll, findBy gibi keyworlerle oluşum sağlanır
+	//buna ilave gerekli parametreler bizim kullandığımız değişken isimleri(field) olurlar
 	List<ProgrammingTechnology> findAllById(int id);
 	List<ProgrammingTechnology> findAllByName(String name);
 	
