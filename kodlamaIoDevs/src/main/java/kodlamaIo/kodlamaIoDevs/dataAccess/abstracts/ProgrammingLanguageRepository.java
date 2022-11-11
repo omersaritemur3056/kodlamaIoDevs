@@ -14,5 +14,7 @@ public interface ProgrammingLanguageRepository extends JpaRepository<Programming
 	List<ProgrammingLanguage> findAllByName(String name);
 	
 	ProgrammingLanguage findById(int id);
-	ProgrammingLanguage findByName(String name);
+	
+	
+	ProgrammingLanguage findByNameAndId(String name, int id);
 }
