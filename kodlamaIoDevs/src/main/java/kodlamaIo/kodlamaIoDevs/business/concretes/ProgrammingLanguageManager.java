@@ -81,11 +81,11 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 			//88. satıra kadar olan kodlar bütün programlama dillerinin teknolojilerini göstermek içindi
 			var techs = programmingTechnologyRepository.findAll().stream()
                     .filter(x -> x.getProgrammingLanguage().getId() == programmingLanguage.getId()).toList();
-            List<String> result = new ArrayList<>();
+            List<String> listItem = new ArrayList<>();
             for (var tech : techs) {
-                result.add(tech.getName());
+                listItem.add(tech.getName());
             }
-            programmingLanguageResponseItem.setProgrammingTechnologies(result);
+            programmingLanguageResponseItem.setProgrammingTechnologies(listItem);
 			
 			getListProgrammingLanguagesResponse.add(programmingLanguageResponseItem);
 		}
@@ -105,14 +105,14 @@ public class ProgrammingLanguageManager implements ProgrammingLanguageService {
 		
 		getProgrammingLanguageById.setId(result.getId());
 		getProgrammingLanguageById.setName(result.getName());
-		//bir programlama dilinin bütün technologylerini göstermek içindi 107'ye kadar olan kodlar
+		//bir programlama dilinin bütün technologylerini göstermek içindi buradan 115. satıra kadar olan kodlar
 		var techs = programmingTechnologyRepository.findAll().stream()
                 .filter(x -> x.getProgrammingLanguage().getId() == id).toList();
-        List<String> item = new ArrayList<>();
+        List<String> listItem = new ArrayList<>();
         for (var tech : techs) {
-            item.add(tech.getName());
+            listItem.add(tech.getName());
         }
-        getProgrammingLanguageById.setProgrammingTechnologies(item);
+        getProgrammingLanguageById.setProgrammingTechnologies(listItem);
 		
 		return getProgrammingLanguageById;
 	}
